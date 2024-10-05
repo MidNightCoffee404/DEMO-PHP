@@ -1,39 +1,63 @@
 <?php
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username         = $_POST["username"];
+    $email            = $_POST["email"];
+    $password         = $_POST["password"];
+    $confirm_password = $_POST["confirm-password"];
 
-    $username = $_POST["username"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $confirm_password = $_POST["confirm_password"];
-
-
-
-
-/*    if(trim($username) != ""){
-        echo "Field is Complete";
+    // Validate
+    if (trim($username) != "") {
+        echo "User username is not empty<br>";
     } else {
-        echo "Username Field Is Empty";
+        echo "Field username is empty <br>";
     }
 
-    if(trim($email) != ""){
-        echo "Field is Complete";
+    if (trim($email) != "") {
+        echo "User email is not empty<br>";
     } else {
-        echo "Email Field Is Empty";
+        echo "Field email is empty <br>";
     }
 
-    if(trim($password) != ""){
-        echo "Field is Complete";
+    if (trim($password) != "") {
+        echo "User password is not empty<br>";
     } else {
-        echo "Password Field Is Empty";
+        echo "Field password is empty <br>";
     }
 
-    if(trim($confirm_password) != ""){
-        echo "Field is Complete";
+    if (trim($confirm_password) != "") {
+        echo "User confirm password is not empty<br>";
     } else {
-        echo "Confirm Password Field Is Empty";
+        echo "Field confirm password is empty <br>";
     }
 
-} */
+    // Check if passwords match
+    if ($password === $confirm_password) {
+        header("Location: demo1.php?success=REGISTRATION SUCCESSFUL");
+        exit;
+    } else {
+        header("Location: demo1.php?error=PASSWORD MISMATCH");
+        exit;
+    }
+}
+
+// Uncomment to debug user input
+/*
+echo "User email is " . $email . "<br>";
+echo "User username is " . $username . "<br>";
+
+test($username);
+test($email);
+test($password);
+test($confirm_password);
+
+function test($fieldName) {
+    if (trim($fieldName) != "") {
+        echo "User $fieldName is NOT EMPTY<br>";
+    } else {
+        echo "Field $fieldName is EMPTY<br>";
+    }
+}
+*/
 
 ?>
